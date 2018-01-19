@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { Fade } from 'react-reveal';
 import { map } from 'lodash';
+import Reveal from '../ScrollReveal';
 
 // @supports (display: grid) {
 //    // code that will only run if CSS Grid is supported by the browser
@@ -10,35 +10,38 @@ import { map } from 'lodash';
 class Projects extends Component {
   constructor(props) {
     super(props);
-    this.state = { show: false };
+    this.state = { show: true };
+    this.handleReveal = (domEl) => {
+      this.setState({ show: true });
+      this.forceUpdate();
+      console.log("RESET");
+    }
   }
 
   render() {
     return (
-      <Fade preventDebounce={true} onReveal={() => this.setState({ show: true })}>
-        <Grid>
-          <Title show={this.state.show}>Projects</Title>
-          {
-            map(this.props.projects, (project, index) => (
-              <Tile key={project.title}>
-                <div><div>{ project.title }</div></div>
-                <div>
-                  {
-                    map(project.details, (detail, index) => (
-                      <div style={{ margin: "10px 0", overflow: "hidden"}} key={"detail"+index}>{ detail }</div>
-                    ))
-                  }
-                </div>
-              </Tile>
-            ))
-          }
-        </Grid>
-      </Fade>
+      <Grid options={{ mobile: true, viewFactor: 0.5, origin: "top", distance: "100px", afterReveal: this.handleReveal }} interval={150} reveal="project-tile-reveal">
+        <Title className="project-tile-reveal" show={this.state.show}>Projects</Title>
+        {
+          map(this.props.projects, (project, index) => (
+            <Tile className="project-tile-reveal" key={project.title}>
+              <div><div>{ project.title }</div></div>
+              <div>
+                {
+                  map(project.details, (detail, index) => (
+                    <div style={{ margin: "10px 0", overflow: "hidden"}} key={"detail"+index}>{ detail }</div>
+                  ))
+                }
+              </div>
+            </Tile>
+          ))
+        }
+      </Grid>
     )
   }
 }
 
-const Grid = styled.div`
+const Grid = styled(Reveal)`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: auto repeat(auto-fill, minmax(250px, 1fr));
@@ -156,7 +159,6 @@ const Title = styled.div`
   &::before, &::after {
     content: "";
     box-sizing: inherit;
-    position: absolute;
     position: absolute;
     border: solid 2px transparent;
     width: 100%;

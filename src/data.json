@@ -9,7 +9,7 @@
         "Marketing Services Fullstack"
       ],
       "details": [
-        "... In Progress ..."
+        "(Summer 2018)"
       ],
       "skills": [
         "... In Progress ..."
@@ -25,7 +25,7 @@
         "Operations Research Intern"
       ],
       "details": [
-        "... In Progress ..."
+         "(Winter 2018)"
       ],
       "skills": [
         "... In Progress ..."
@@ -43,11 +43,10 @@
         "Backend Developer"
       ],
       "details": [
-        "Created dashboard forthe Kubernetes CLI using websockets to allow real-time updates. Linked Kubernetes with Orchard, a in-house environment provisioning tool for AppDirect.",
-        "Pipelined Segment.io data into analytics to find and implement features to improve user efficiency by 90% and eliminating 5s load time.",
-        "Added search and bookmarking feature to make large audit logs accessible/useful for debugging.",
-        "Wrote scaffolding for new project with MongoDB GraphQL, and complex dynamic forms. The project pipelines the normally tedious process of creating/updating configuration files for deployment infrastructure.",
-        "Reduced context switching and support tickets by implementing \"Slackops\" to replace dashboards with a interactive chatbot."
+        "Created dashboard for the Kubernetes CLI using websockets. Linked Kubernetes with Orchard, a in-house environment provisioning tool.",
+        "Pipelined Segment.io data into analytics, used to improve user efficiency by 90% and eliminating the 5s load time. Added access and search to logs and audits.",
+        "Scaffolded new project with GraphQL, and created complex dynamic forms. The project streamlines the tedious creation of config files.",
+        "Replaced dashboards with \"Slackops\", a chatbot to answer and quickly deal with support tickets."
       ],
       "detailsOLD": [
         "Developed and maintained \"Orchard\", a highly efficient and fast environment provisioner for AppDirect engineers to develop on. The UI updates saved at 80% of clicks, monitored using analytics tools like HeapAnalytics integrated through segment.io.",

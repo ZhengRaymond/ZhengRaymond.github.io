@@ -1,0 +1,129 @@
+.fastbar {
+  z-index: 10;
+  padding-top: 6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  width: auto;
+}
+.fastbar.fixed {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transition: 0.5s ease;
+  overflow: hidden;
+}
+
+.fastbar > span {
+  margin: 0 2vw;
+}
+.fastbar.fixed > span {
+  margin: 0 5vw;
+}
+
+.fastbar.normal {
+  transition: 3s ease;
+}
+
+.fastbar button img {
+  transition: 0.5s ease;
+}
+.fastbar.fixed button img {
+  transition: 0.8s ease;
+  transform: scale(0.6);
+}
+
+.fastbar.fixed button {
+  transform: translate(-19px, 0px);
+}
+
+.fastbar button span {
+  transition: 0.5s ease;
+}
+
+.fastbar.fixed button span {
+  transform: translate(45px, -38px);
+  transition: 0.5s ease;
+}
+.fastbar.fixed span:nth-child(2) span {
+  transform: translate(47px, -38px);
+}
+.fastbar.fixed span:nth-child(3) span {
+  transform: translate(53px, -38px);
+}
+.fastbar.fixed span:nth-child(5) span {
+  transform: translate(50px, -38px);
+}
+
+.fastbar.fixed .fastbar-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 62px;
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0px 10px 0px grey;
+}
+
+/*
+@media (max-width: 425px) {
+  .fastbar.fixed {
+    left: 20px;
+  }
+  .fastbar.fixed > span {
+    margin: 5px;
+  }
+} */
+
+@media (max-width: 650px) {
+
+  .fastbar.fixed button span {
+    display: none;
+  }
+  .fastbar.fixed > span {
+    justify-content: space-around;
+  }
+  .fastbar.fixed > span:nth-child(2) {
+    margin-left: 5vw;
+  }
+  .fastbar.fixed > span:last-child {
+    margin-right: 5vw;
+  }
+}
+
+
+
+.fastbar-mobile {
+  display: none;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  box-shadow: 0 0 12px 0 #ddd;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+@media (max-width: 425px) {
+  .fastbar {
+    display: none;
+  }
+
+  .fastbar-mobile {
+    display: flex;
+  }
+}
+
+.fastbar-mobile form {
+  display: flex;
+}
+
+.fastbar-mobile form:last-child div {
+  display: none;
+}

@@ -1,20 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import './index.css';
-import { Fade } from 'react-reveal';
+import Reveal from '../ScrollReveal';
 
 const Greeting = (props) => (
-  <Fade style={{ display: 'flex', justifyContent: "center", width: "100%"}}>
-    <div style={{ position: "relative", margin: "5%" }}>
-      <Header className="underline">{ props.text }</Header>
+  <Reveal>
+    <div style={{ display: 'flex', flexDirection: "column", alignItems: "center", width: "100%"}}>
+      <Header>{ props.text }</Header>
+      <div className="underline"/>
     </div>
-  </Fade>
+  </Reveal>
 )
 
 const Header = styled.h1`
-  font-size: 4em;
+  font-size: 9vmin;
+  margin-bottom: 8px;
   font-weight: lighter;
-  @media(max-width: 505px) {
+  @media(max-width: 700px) {
     font-size: 10vw;
   }
 `;

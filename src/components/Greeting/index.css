@@ -1,8 +1,4 @@
-.underline::after {
-  content: "";
-  position: absolute;
-  bottom: 11px;
-  left: 10%;
+.underline {
   height: 1px;
   width: 80%;
   background: #444;

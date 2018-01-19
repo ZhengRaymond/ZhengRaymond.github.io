@@ -1,22 +1,17 @@
 import React from 'react';
+import styled from 'styled-components';
 
-const Page = (props) => {
-  const style = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: "center",
-    margin: "10vh",
-    width: '80%',
-    height: props.unlimited ? "auto" : "100vh",
-    backgroundColor: props.backgroundColor || "white",
-    zIndex: props.top ? -1 : -2
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10vh 15vw;
+  @media (max-width: 700px) {
+    margin: 10vh 5vw;
   }
-
-  return (
-    <div style={style}>
-      { props.children }
-    </div>
-  )
-}
+  max-width: ${ props => props.max || "1200px" };
+  height: ${ props => props.unlimited ? "auto" : "100vh" };
+  background-color: ${ props => props.backgroundColor || "white"};
+`;
 
 export default Page;

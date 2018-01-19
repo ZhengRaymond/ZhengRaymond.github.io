@@ -2,67 +2,149 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Fade } from 'react-reveal';
 import { map } from 'lodash';
+import Reveal from '../ScrollReveal';
 
 class Work extends Component {
   render() {
-    const { title, details, completed, link } = this.props.data;
-    const { icon } = this.props;
-    if (!completed) {
-      if (this.props.incomplete) return (
-        <span style={{ margin: "0 40px"}}>
-          <Link href={link} target="_blank">
-            <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
-              <Icon><img src={icon}/></Icon>
-              <Title>{ title }</Title>
-            </div>
-          </Link>
-        </span>
-      );
-      else {
-        return <span/>
-      }
-    }
-    let content;
-    if (this.props.index % 2 === 0) content = (
-      <Row>
-        <Link href={link} target="_blank">
-          <Icon left preventDebounce={true}>
-            <img src={icon}/>
-          </Icon>
-        </Link>
-        <Text right preventDebounce={true}>
-          { map(details, (detail, index) => (<Detail key={"workDetail"+index}>{ detail }</Detail>)) }
-        </Text>
-      </Row>
-    );
-    else content = (
-      <Row>
-        <Text left preventDebounce={true}  style={{ textAlign: "right" }}>
-          { map(details, (detail, index) => (<Detail key={"workDetail"+index}>{ detail }</Detail>)) }
-        </Text>
-        <Link href={link} target="_blank">
-          <Icon right preventDebounce={true}>
-            <img src={icon}/>
-          </Icon>
-        </Link>
-      </Row>
-    );
-
     return (
-      <Panel completed={completed}>
-        <Row>
-          <Title preventDebounce={true}>
-            <Link href={link} target="_blank">{title}</Link>
-          </Title>
-        </Row>
-        { content }
-      </Panel>
+      <Container>
+        {
+          map(this.props.work, ({ title, details, completed, link, icon }, index) => (
+            index % 2 === 0 ? (
+              <Panel>
+                <Title>
+                  <Link href={link} target="_blank">{title}</Link>
+                </Title>
+                <Icon options={{ viewFactor: 0.2, origin: "left", distance: "100px" }}>
+                  <Link href={link} target="_blank">
+                    <img src={icon}/>
+                  </Link>
+                </Icon>
+                <Text options={{ origin: "right", distance: "100px" }} interval={100} reveal="work-detail-reveal" >
+                  { map(details, (detail, index) => (<Detail className="work-detail-reveal" key={"workDetail"+index}>{ detail }</Detail>)) }
+                </Text>
+              </Panel>
+            ):(
+              <Panel>
+                <Title>
+                  <Link href={link} target="_blank">{title}</Link>
+                </Title>
+                <Text options={{ origin: "left", distance: "100px" }} style={{ textAlign: "right" }} interval={100} reveal="work-detail-reveal">
+                  { map(details, (detail, index) => (<Detail className="work-detail-reveal" key={"workDetail"+index}>{ detail }</Detail>)) }
+                </Text>
+                <Icon options={{ viewFactor: 0.2, origin: "right", distance: "100px" }}>
+                  <Link href={link} target="_blank">
+                    <img src={icon}/>
+                  </Link>
+                </Icon>
+              </Panel>
+            )
+          ))
+        }
+      </Container>
     );
   }
 }
 
+const mobileWidth = 500;
+const tabletWidth = 900;
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-items: center;
+  align-items: center;
+
+  @media(max-width: ${tabletWidth}px) {
+    & div:nth-child(1) div img {
+      left: -20vw;
+      top: 0;
+    }
+    & div:nth-child(2) div img {
+      left: 30vw;
+      top: -60vh;
+    }
+  }
+`;
+
+const Panel = styled.div`
+  width: 100%;
+  margin-bottom: 100px;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  grid-template-columns: auto auto auto;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+`;
+
+const Title = styled(Reveal)`
+  grid-column: span 3;
+  padding: 5px;
+  font-size: 3em;
+  font-weight: lighter;
+  @media (max-width: ${mobileWidth}px) {
+    margin: 0;
+  }
+`;
+
+const Icon = styled(Reveal)`
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-row: span 2;
+
+  & img {
+    width: 30vmin;
+    height: 30vmin;
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 150px;
+  }
+
+  @media (max-width: ${tabletWidth}px) {
+    position: relative;
+    & img {
+      margin: 0;
+      top: -30vmin;
+      position: absolute;
+      width: 60vmin;
+      height: 60vmin;
+      opacity: 0.05;
+    }
+  }
+
+  @media (max-width: ${tabletWidth}px) {
+    position: relative;
+    & img {
+      margin: 0;
+      position: absolute;
+      width: 80vmin;
+      height: 80vmin;
+      opacity: 0.05;
+    }
+  }
+`;
+
+const Text = styled(Reveal)`
+  grid-column: span 2;
+  grid-row: span 2;
+  align-self: stretch;
+  text-shadow: 0 0 4px white;
+
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(auto-fill, 1fr);
+  @media (max-width: ${tabletWidth}px) {
+    grid-column: span 3;
+    grid-row: span 3;
+  }
+`;
+
 const Link = styled.a`
-  textDecoration: none;
+  text-decoration: none;
   color: black;
   transition: 0.5s ease;
 
@@ -76,51 +158,6 @@ const Detail = styled.div`
   margin: 10px;
   font-weight: lighter;
   font-size: 18px;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-`;
-
-const Title = styled(Fade)`
-  font-size: 3em;
-  width: 100%;
-  text-align: center;
-  font-weight: lighter;
-`;
-
-const Icon = styled(Fade)`
-  flex: 1;
-  margin: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  & img {
-    width: 300px;
-    height: 300px;
-    background-color: #555;
-    border-radius: 150px;
-  }
-`;
-
-const Text = styled(Fade)`
-  flex: 3;
-  margin: 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`;
-
-const Panel = styled.div`
-  width: 100%;
-  height: ${props => props.completed ? "500px" : "300px"};
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
 `;
 
 export default Work;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { map } from 'lodash';
 import { Fade } from 'react-reveal';
+import sr from 'scrollreveal';
+import './index.css';
 
 import github from './github.gif';
 import githubStatic from './github.jpg';
@@ -18,17 +20,23 @@ class Fastbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fixed: 0
+      fixed: false
     }
     this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
-    let elements = document.getElementsByClassName("fastbarLine");
-    if (elements.length > 0) {
-      this.height = elements[0].getBoundingClientRect().bottom + (window.pageYOffset || document.documentElement.scrollTop);
-      this.setState({...this.state, height: this.height });
+    const options = {
+      duration: 800,
+      origin: "bottom",
+      distance: "50px",
+      mobile: false
     }
+
+    sr().reveal(this.refs.fastbarReveal, options)
+    console.log(this.refs.fastbarReveal.getBoundingClientRect().top, (window.pageYOffset || document.documentElement.scrollTop))
+    this.height = this.refs.fastbarReveal.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop);
+
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -37,32 +45,21 @@ class Fastbar extends Component {
   }
 
   handleScroll(e) {
-    let scrollTop = document.documentElement.scrollTop - 30;
+    let scrollTop = document.documentElement.scrollTop;
     if (scrollTop < this.height && this.state.fixed !== 0) {
-      this.setState({ ...this.state, fixed: 0 });
+      this.setState({ ...this.state, fixed: false });
     }
     else if (scrollTop >= this.height && this.state.fixed !== 1) {
-      this.setState({ ...this.state, fixed: 1 });
+      this.setState({ ...this.state, fixed: true });
     }
   }
 
   render() {
     const { fixed } = this.state;
-    let style = {
-      width: "50%",
-      transition: "width 0.5s ease"
-    };
-    if (fixed === 1) {
-      style = {
-        ...style,
-        position: "fixed",
-        top: "0px",
-        width: "100%",
-      }
-    }
     return (
-      <Fade bottom style={style}>
-        <Container fixed={fixed}>
+      <div ref="fastbarReveal">
+        <Container className={fixed ? "fastbar fixed" : "fastbar"}>
+          <div className="fastbar-background"/>
           {
             map(links, ({ action, animatedImage, staticImage, method, target }, name) => (
               <Item fixed={fixed} key={name}>
@@ -77,7 +74,19 @@ class Fastbar extends Component {
             )
           }
         </Container>
-      </Fade>
+        <div className="fastbar-mobile">
+          {
+            map(links, ({ action, method, target }, name) => (
+              <form method={method} action={ action } target={target} className="hvr-shadow hvr-grow">
+                <Button fixed={fixed} type="submit">
+                  <span>{ name }</span>
+                </Button>
+                <div style={{ margin: "2px 0 4px 0", alignSelf: 'stretch', width: "1px", backgroundColor: "black"}}/>
+              </form>
+            ))
+          }
+        </div>
+      </div>
     )
   }
 }
@@ -93,14 +102,8 @@ const float2 = keyframes`
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(2px); }
 `;
-
+// animation: ${props => props.fixed ? "" : `${float2} 4s infinite, ${float} 3.5s infinite`};
 const Item = styled.span`
-  flex: 1;
-  max-width: 150px;
-  display: flex;
-  justify-content: center;
-  animation: ${props => props.fixed ? "" : `${float2} 4s infinite, ${float} 3.5s infinite`};
-
   &:nth-child(2n) {
     animation-delay: -3s;
     animation-duration: 3.8s;
@@ -121,7 +124,7 @@ const Item = styled.span`
 
   & button {
     width: 100%;
-    padding: 10px 0.8vw;
+    padding: 0;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -134,28 +137,15 @@ const Item = styled.span`
 `;
 
 const Container = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-end;
-  background-color: rgba(255, 255, 255, 0.94);
-  height: ${props => props.fixed ? "60px" : "" };
-  overflow: ${ props => props.fixed ? "hidden" : "visible" };
-  padding-bottom: 10px;
-  box-sizing: border-box;
-
-  & span:nth-child(2) span, & span:nth-child(4) span {
-    transform: ${props => props.fixed ? "translate(53px, -38px)" : ""};
+  & * {
+    transition: 0.5s ease;
   }
 `;
 
-// flex-direction: ${props => props.fixed ? "row" : "column"};
 const Button = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: purple;
 
   & .animated-image {
     display: none;
@@ -175,17 +165,6 @@ const Button = styled.button`
     & .static-image {
       display: none;
     }
-  }
-
-  & img {
-    transition: 0.5s ease;
-    transform: ${props => props.fixed ? "scale(0.6)" : ""};
-  }
-
-  transform: ${props => props.fixed ? "translate(-30px, 40px)" : ""};
-
-  & span {
-    transform: ${props => props.fixed ? "translate(45px, -38px)" : ""};
   }
 `;
 
