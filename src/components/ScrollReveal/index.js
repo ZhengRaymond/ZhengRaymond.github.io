@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import sr from 'scrollreveal';
-import { map } from 'lodash';
 
 class ScrollReveal extends Component {
 
@@ -13,7 +12,6 @@ class ScrollReveal extends Component {
     };
     const { interval } = this.props;
     if (this.props.interval) {
-      console.log(this.props.reveal);
       sr().reveal("."+this.props.reveal, options, interval);
     }
     else {

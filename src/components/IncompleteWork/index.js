@@ -9,8 +9,8 @@ class IncompleteWork extends Component {
       <Container>
         {
           map(this.props.work, ({ title, details, completed, link, icon }, index) => (
-            <Link href={link} target="_blank">
-              <Icon><div><img src={icon}/></div></Icon>
+            <Link key={title} href={link} target="_blank">
+              <Icon><div><img alt={title} src={icon}/></div></Icon>
               <Title>{ title }</Title>
               <Text>{details[0]}</Text>
             </Link>
@@ -55,13 +55,6 @@ const Title = styled(Reveal)`
   }
   text-align: center;
   font-weight: lighter;
-`;
-
-
-const Detail = styled(Reveal)`
-  margin: 10px;
-  font-weight: lighter;
-  font-size: 18px;
 `;
 
 const Icon = styled(Reveal)`

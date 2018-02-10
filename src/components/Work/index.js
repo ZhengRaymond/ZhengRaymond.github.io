@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Fade } from 'react-reveal';
 import { map } from 'lodash';
 import Reveal from '../ScrollReveal';
 
@@ -11,13 +10,13 @@ class Work extends Component {
         {
           map(this.props.work, ({ title, details, completed, link, icon }, index) => (
             index % 2 === 0 ? (
-              <Panel>
+              <Panel key={title}>
                 <Title>
                   <Link href={link} target="_blank">{title}</Link>
                 </Title>
                 <Icon options={{ viewFactor: 0.2, origin: "left", distance: "100px" }}>
                   <Link href={link} target="_blank">
-                    <img src={icon}/>
+                    <img alt={link} src={icon}/>
                   </Link>
                 </Icon>
                 <Text options={{ origin: "right", distance: "100px" }} interval={100} reveal="work-detail-reveal" >
@@ -25,7 +24,7 @@ class Work extends Component {
                 </Text>
               </Panel>
             ):(
-              <Panel>
+              <Panel key={title}>
                 <Title>
                   <Link href={link} target="_blank">{title}</Link>
                 </Title>
@@ -34,7 +33,7 @@ class Work extends Component {
                 </Text>
                 <Icon options={{ viewFactor: 0.2, origin: "right", distance: "100px" }}>
                   <Link href={link} target="_blank">
-                    <img src={icon}/>
+                    <img alt={link} src={icon}/>
                   </Link>
                 </Icon>
               </Panel>

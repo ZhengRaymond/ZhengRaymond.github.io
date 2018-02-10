@@ -14,26 +14,34 @@ class Projects extends Component {
     this.handleReveal = (domEl) => {
       this.setState({ show: true });
       this.forceUpdate();
-      console.log("RESET");
     }
   }
 
   render() {
+    const colors = [
+      "#03A9F4",
+      "#9C27B0",
+      "#E91E63",
+      "#ffc107",
+      "#80ff84",
+    ]
     return (
       <Grid options={{ mobile: true, viewFactor: 0.5, origin: "top", distance: "100px", afterReveal: this.handleReveal }} interval={150} reveal="project-tile-reveal">
         <Title className="project-tile-reveal" show={this.state.show}>Projects</Title>
         {
           map(this.props.projects, (project, index) => (
-            <Tile className="project-tile-reveal" key={project.title}>
-              <div><div>{ project.title }</div></div>
-              <div>
-                {
-                  map(project.details, (detail, index) => (
-                    <div style={{ margin: "10px 0", overflow: "hidden"}} key={"detail"+index}>{ detail }</div>
-                  ))
-                }
-              </div>
-            </Tile>
+            <a key={project.title} href={project.link} target="_blank" style={{ textDecorationColor: colors[index] }}>
+              <Tile className="project-tile-reveal" key={project.title}>
+                <div><div>{ project.title }</div></div>
+                <div>
+                  {
+                    map(project.details, (detail, index) => (
+                      <div style={{ margin: "10px 0", overflow: "hidden"}} key={"detail"+index}>{ detail }</div>
+                    ))
+                  }
+                </div>
+              </Tile>
+            </a>
           ))
         }
       </Grid>
