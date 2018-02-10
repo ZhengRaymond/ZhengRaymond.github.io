@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Greeting, Fastbar, ScrollDownArrow, Page, Work, IncompleteWork, Projects } from './components';
-import { map, zipWith } from 'lodash';
+import { Greeting, Fastbar, ScrollDownArrow, Page, Work, IncompleteWork, Projects, Contact, Appointer } from './components';
+import { zipWith } from 'lodash';
 import { incompleteWork as incompleteWorkData, work as workData, projects } from './data.json';
 import EtsyIcon from './assets/Etsy.jpeg';
 import GenesysIcon from './assets/Genesys.png';
 import HomerIcon from './assets/Homer.png';
 import AppdirectIcon from './assets/Appdirect.svg';
 import styled, { keyframes } from 'styled-components';
-import sr from 'scrollreveal';
 
 const incompleteWork = zipWith(incompleteWorkData, [ EtsyIcon, HomerIcon ], (item, value) => ({ ...item, icon: value }));
 const work = zipWith(workData, [ AppdirectIcon, GenesysIcon ], (item, value) => ({ ...item, icon: value }));
@@ -30,6 +29,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Appointer/>
         <WhiteFade style={{ display: this.state.fadeInitial }}/>
         <Page top={true}>
           <div style={{ height: "20vh" }}/>
@@ -45,6 +45,9 @@ class App extends Component {
         </Page>
         <Page unlimited={true} backgroundColor="white">
           <Projects projects={projects} />
+        </Page>
+        <Page>
+          <Contact/>
         </Page>
       </div>
     );

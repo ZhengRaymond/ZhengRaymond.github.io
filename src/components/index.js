@@ -5,6 +5,8 @@ import Page from './Page';
 import Work from './Work';
 import IncompleteWork from './IncompleteWork';
 import Projects from './Projects';
+import Contact from './Contact';
+import Appointer from './Appointer';
 
 export {
   Greeting,
@@ -13,5 +15,7 @@ export {
   Page,
   Work,
   IncompleteWork,
-  Projects
+  Projects,
+  Contact,
+  Appointer,
 }
