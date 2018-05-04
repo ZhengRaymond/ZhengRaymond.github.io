@@ -1,39 +1,35 @@
-from Queue import Queue
+from queue import PriorityQueue
+import sys
 
-q = Queue()
-yMax = len(grid) - 1
-xMax = len(grid[0]) - 1
-src, food = None, []
-for (y, row) in enumerate(grid):
-    for (x, item) in enumerate(row):
-        if item == "*":
-            src = (x, y, 0)
-            break
-    if src != None:
-        break
+heightMap = [
+  [1,4,3,1,3,2],
+  [3,2,1,3,2,4],
+  [2,3,3,2,3,1]
+]
 
-q.put(src)
-shortest = 50000
+nrows = len(heightMap)
+ncols = len(heightMap[0])
+q = PriorityQueue()
+edges = ([(irow, icol)
+  for (irow, row) in enumerate(heightMap)
+  for (icol, col) in enumerate(row)
+  if irow == 0 or irow == nrows - 1 or icol == 0 or icol == ncols - 1])
+# visitors = ([irow == 0 or irow == nrows-1 or icol == 0 or icol == ncols - 1
+#   for (irow, row) in enumerate(heightMap)
+#   for (icol, col) in enumerate(row)
+# ])
+visitors = [[-1] * ncols for i in range(nrows)]
+for (irow, icol) in edges:
+    q.put((heightMap[irow][icol], irow, icol))
+maxHeight = -1
 while not q.empty():
-    x, y, dist = q.get()
-    if grid[y][x] == "X" or grid[y][x] == "@":
-        continue
-    elif grid[y][x] == "#":
-        shortest = min(shortest, dist)
-        grid[y][x] = "@"
-        continue
-    grid[y][x] = "@"
+    height, irow, icol = q.get()
+    if height > maxHeight:
+        maxHeight = height
+    visitors[irow][icol] = max(maxHeight - height, visitors[irow][icol], 0)
+    for (row, col) in [(irow-1, icol), (irow+1, icol), (irow, icol-1), (irow, icol+1)]:
+        if row >= 0 and row < nrows and col >= 0 and col < ncols and visitors[row][col] < 0:
+            q.put((heightMap[row][col], row, col))
 
-    if x > 0:
-        q.put(( x-1, y,   dist+1))
-    if x < xMax:
-        q.put(( x+1, y,   dist+1))
-    if y > 0:
-        q.put(( x,   y-1, dist+1))
-    if y < yMax:
-        q.put(( x,   y+1, dist+1))
 
-if shortest == 50000:
-    shortest = -1
-
-print shortest
+print(water)

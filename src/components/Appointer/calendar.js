@@ -7,10 +7,10 @@ import ChevronRightIcon from 'react-icons/lib/fa/angle-double-right';
 
 function getDatesForMonth(month) {
   const days = [];
-  const monthNumber = moment().month(month).month();
-  const momentIter =  moment().month(month).startOf("month").startOf("week");
+  const momentIter =  moment().month(month).startOf("week");
+  const monthNumber =  moment().month(month);
   const todayIndex = moment().diff(momentIter, 'days');
-  for (var i = 0; i < 35; i++) {
+  for (var i = 0; i < 14; i++) {
     days.push({
       date: momentIter.clone(),
       isToday: i === todayIndex,
@@ -94,7 +94,7 @@ const Title = styled.div`
 
 const CalendarContainer = styled.div`
   display: grid;
-  grid-template-rows: auto repeat(5, 1fr);
+  grid-template-rows: auto repeat(3, 1fr);
   grid-template-columns: repeat(7, 1fr);
   align-items: stretch;
   justify-items: stretch;

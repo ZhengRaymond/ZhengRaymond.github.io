@@ -8,7 +8,7 @@ import CalendarIcon from 'react-icons/lib/fa/calendar';
 class Appointer extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: true }
+    this.state = { open: false }
     this.open = () => this.setState({ open: true });
     this.close = (e) => {
       this.setState({ open: false });
@@ -48,6 +48,7 @@ class DatePicker extends Component {
       this.setState({ ...this.state, openTab: tab });
     }
     this.onSubmit = (e, data) => {
+      this.setState({ ...this.state, openTab: 0})
       this.props.onClose(e);
     }
   }
