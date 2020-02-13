@@ -5,6 +5,20 @@ import Time from './time';
 import Result from './result';
 import CalendarIcon from 'react-icons/lib/fa/calendar';
 
+
+const expand = keyframes`
+  0%, 65%, 100% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.95);
+  }
+  82% {
+    transform: scale(1.05);
+  }
+`;
+
+
 class Appointer extends Component {
   constructor(props) {
     super(props);
@@ -142,17 +156,6 @@ const CalendarIconAnimate = styled(CalendarIcon)`
   margin: 27px 27px 93px 93px;
 `;
 
-const expand = keyframes`
-  0%, 65%, 100% {
-    transform: scale(1);
-  }
-  75% {
-    transform: scale(0.95);
-  }
-  82% {
-    transform: scale(1.05);
-  }
-`;
 
 // const CloseButton = styled.div`
 //   position: absolute;
