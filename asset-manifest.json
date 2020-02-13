@@ -1,15 +1,31 @@
 {
-  "main.css": "static/css/main.c812c4d7.css",
-  "main.css.map": "static/css/main.c812c4d7.css.map",
-  "main.js": "static/js/main.118ef1c1.js",
-  "main.js.map": "static/js/main.118ef1c1.js.map",
-  "static/media/Appdirect.svg": "static/media/Appdirect.7907b41d.svg",
-  "static/media/Etsy.jpeg": "static/media/Etsy.76c40b33.jpeg",
-  "static/media/Homer.png": "static/media/Homer.394a479d.png",
-  "static/media/email.gif": "static/media/email.36d2be59.gif",
-  "static/media/github.gif": "static/media/github.28020003.gif",
-  "static/media/github.jpg": "static/media/github.69a83f19.jpg",
-  "static/media/linkedin.gif": "static/media/linkedin.e76f203c.gif",
-  "static/media/phone.gif": "static/media/phone.63502a76.gif",
-  "static/media/resume.gif": "static/media/resume.1f7d9133.gif"
+  "files": {
+    "main.css": "/static/css/main.69c1f6af.chunk.css",
+    "main.js": "/static/js/main.8fe463ce.chunk.js",
+    "main.js.map": "/static/js/main.8fe463ce.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.7aa1488f.js",
+    "runtime-main.js.map": "/static/js/runtime-main.7aa1488f.js.map",
+    "static/js/2.edc11d66.chunk.js": "/static/js/2.edc11d66.chunk.js",
+    "static/js/2.edc11d66.chunk.js.map": "/static/js/2.edc11d66.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.025e6f5978234a1e79b736237cd105fe.js": "/precache-manifest.025e6f5978234a1e79b736237cd105fe.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.69c1f6af.chunk.css.map": "/static/css/main.69c1f6af.chunk.css.map",
+    "static/js/2.edc11d66.chunk.js.LICENSE.txt": "/static/js/2.edc11d66.chunk.js.LICENSE.txt",
+    "static/media/Appdirect.svg": "/static/media/Appdirect.7907b41d.svg",
+    "static/media/Etsy.jpeg": "/static/media/Etsy.76c40b33.jpeg",
+    "static/media/Homer.png": "/static/media/Homer.394a479d.png",
+    "static/media/email.gif": "/static/media/email.36d2be59.gif",
+    "static/media/github.gif": "/static/media/github.28020003.gif",
+    "static/media/github.jpg": "/static/media/github.69a83f19.jpg",
+    "static/media/linkedin.gif": "/static/media/linkedin.e76f203c.gif",
+    "static/media/phone.gif": "/static/media/phone.63502a76.gif",
+    "static/media/resume.gif": "/static/media/resume.1f7d9133.gif"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.7aa1488f.js",
+    "static/js/2.edc11d66.chunk.js",
+    "static/css/main.69c1f6af.chunk.css",
+    "static/js/main.8fe463ce.chunk.js"
+  ]
 }
