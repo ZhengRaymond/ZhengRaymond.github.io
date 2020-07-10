@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Link, animateScroll as scroll, Element } from "react-scroll";
-import { Greeting, Fastbar, ScrollDownArrow, Page, Work, IncompleteWork, Projects, Projects2, Appointer, Sidebar, Gallery } from './components';
-import { zipWith } from 'lodash';
+import { Element } from "react-scroll";
+import { Greeting, Fastbar, Page, Projects, Projects2, Sidebar, Gallery } from './components';
+import { Header } from './common';
 import { work as data_work, project as data_project } from './data.json';
 import { origami as data_origami } from './data_origami.json';
 import styled, { keyframes } from 'styled-components';
@@ -42,7 +42,10 @@ class App extends Component {
 	        </Page></Element>
 					<div style={{height:"20vh"}}/>
 					<Element name="s_origami"><Page unlimited={true} backgroundColor="white">
-	          <Gallery name="Origami" data={data_origami} />
+						<Header>Origami</Header>
+	          <div style={{width: "60vw"}}>
+						<Gallery data={data_origami} />
+						</div>
 	        </Page></Element>
 					<div style={{height:"20vh"}}/>
 					<div style={{height:"20vh"}}/>

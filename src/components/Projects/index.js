@@ -32,7 +32,7 @@ class Projects extends Component {
 				</Title>
         {
           map(this.props.projects, (project, index) => (
-            <a key={project.title} href={project.link} target="_blank" style={{ textDecorationColor: colors[index % 5] }}>
+            <a key={project.title} href={project.link} target="_blank" rel="noopener noreferrer" style={{ textDecorationColor: colors[index % 5] }}>
               <Tile className="project-tile-reveal" key={project.title}>
                 <div><div>{ project.title }</div></div>
                 <div>

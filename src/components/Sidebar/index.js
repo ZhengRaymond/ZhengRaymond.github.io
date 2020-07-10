@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, animateScroll as scroll, Element } from "react-scroll";
+import { Link } from "react-scroll";
 
 import styled, { keyframes } from 'styled-components';
 
@@ -132,10 +132,6 @@ const Col = styled.div`
 	align-items: flex-start;
 `;
 
-const Row = styled.div`
-	display: flex;
-	flex-direction: row;
-`;
 
 // const Dots = styled.div`
 // 	display: flex;

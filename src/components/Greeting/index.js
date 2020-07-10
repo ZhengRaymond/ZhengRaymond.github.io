@@ -131,10 +131,11 @@ const glitch = keyframes`
 `;
 
 const grow = keyframes`
- 0% {
-	 transform: scale(0);
- }
-`
+0% {
+ transform: scale(0.9);
+}
+`;
+
 
 const Header = styled.h1`
   font-size: 9vmin;
@@ -146,7 +147,8 @@ const Header = styled.h1`
   }
 
 	font-family: 'Source Code Pro', monospace;
-	animation: ${glitch} 3s linear, grow 2s ease-in;
+	animation: ${glitch} 3s linear, ${grow} 2s ease-in;
+	/* animation: grow 2s ease-in; */
 `;
 
 
@@ -161,7 +163,7 @@ const Underline = styled.div`
 	height: 1px;
 	width: 30vw;
 	background: #444;
-	animation: ${widen} 2.4s 0.4s cubic-bezier(.63,.16,.83,.67);
+	animation: ${widen} 2.4s cubic-bezier(.63,.16,.83,.67);
 `
 
 export default Greeting;

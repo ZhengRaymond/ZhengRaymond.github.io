@@ -1,11 +1,64 @@
 {
 	"origami":[
 		{
-			"title":"Robinhood",
-			"link":"https://robinhood.com",
-			"type": "work",
-			"details":["Risk and Fraud Engineer", "Feb 2020 to Current"],
-			"img":"Robinhood.png"
-	 	}
+			"src": "origami/ancient_dragon.jpg",
+			"width": 1080,
+			"height": 810
+		},
+		{
+			"src": "origami/bunny.jpg",
+			"width": 1080,
+			"height": 1350
+		},
+		{
+			"src": "origami/cyclo.jpg",
+			"width": 1080,
+			"height": 810
+		},
+		{
+			"src": "origami/dog.jpg",
+			"width": 1080,
+			"height": 956
+		},
+		{
+			"src": "origami/koi.jpg",
+			"width": 1080,
+			"height": 755
+		},
+		{
+			"src": "origami/kyuubi.jpg",
+			"width": 1080,
+			"height": 860
+		},
+		{
+			"src": "origami/lustre_dragon.jpg",
+			"width": 1080,
+			"height": 899
+		},
+		{
+			"src": "origami/phoenix.jpg",
+			"width": 1080,
+			"height": 1350
+		},
+		{
+			"src": "origami/rooster.jpg",
+			"width": 1080,
+			"height": 828
+		},
+		{
+			"src": "origami/terry_crane.jpg",
+			"width": 1080,
+			"height": 1080
+		},
+		{
+			"src": "origami/tess1.jpg",
+			"width": 1080,
+			"height": 1350
+		},
+		{
+			"src": "origami/totoro.jpg",
+			"width": 1080,
+			"height": 1080
+		}
 	]
 }

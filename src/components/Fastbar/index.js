@@ -8,18 +8,18 @@ import github from './github.gif';
 import linkedin from './linkedin.gif';
 import email from './email.gif';
 import resume from './resume.gif';
-import phone from './phone.gif';
+// import phone from './phone.gif';
 import instagram from './instagram.gif';
 
 class Fastbar extends Component {
 
-		constructor(props) {
-	    super(props);
-			this.state = {
-				past_first: false
-			}
-			this.handleScroll = this.handleScroll.bind(this);
-	  }
+	constructor(props) {
+    super(props);
+		this.state = {
+			past_first: false
+		}
+		this.handleScroll = this.handleScroll.bind(this);
+  }
 
   componentDidMount() {
     const options = {
@@ -54,7 +54,7 @@ class Fastbar extends Component {
 				<QuickNav className={this.state.past_first ? "" : "hidden"}>
 				{
 					map(links, ({ action, animatedImage, method, target }, name) => (
-						<a target="_blank" href={action} className="hvr-grow"><img className="animated-image" height="30px" width="30px" src={animatedImage}/></a>
+						<a target="_blank" rel="noopener noreferrer" href={action} className="hvr-grow"><img alt={action} className="animated-image" height="30px" width="30px" src={animatedImage}/></a>
 					))
 				}
 				</QuickNav>
@@ -211,6 +211,9 @@ const fadein = keyframes`
 `
 
 const FadeIn = styled.div`
+	& {
+		font-family: 'Source Code Pro', monospace;
+	}
  	animation: ${fadein} 3s ease-in;
 
 	/* This is for QuickNav: */

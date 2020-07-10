@@ -32,9 +32,9 @@ class Projects extends Component {
 				</Title>
         {
           map(this.props.projects, (project, index) => (
-            <a key={project.title} href={project.link} target="_blank" style={{ textDecorationColor: colors[index % 5] }}>
+            <a key={project.title} href={project.link} target="_blank" rel="noopener noreferrer" style={{ textDecorationColor: colors[index % 5] }}>
               <Tile className="project-tile-reveal">
-                <div><div><img width="130px" height="130px" src={project.img} style={{ "z-index": "-1"}}/></div></div>
+                <div><div><img alt={project.title + " company logo"} width="130px" height="130px" src={"logo/" + project.img} style={{ "z-index": "-1"}}/></div></div>
                 <div>
 									<div style={{ "font-weight": "normal", "font-size": "1.4em"}}>{ project.title }</div>
                   {
