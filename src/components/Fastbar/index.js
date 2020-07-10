@@ -1,39 +1,33 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { map } from 'lodash';
 import sr from 'scrollreveal';
 import './index.css';
 
-import LazyLoad from 'react-lazyload';
-
 import github from './github.gif';
-import githubStatic from './github.jpg';
 import linkedin from './linkedin.gif';
-import linkedinStatic from './linkedinStatic.gif';
 import email from './email.gif';
-import emailStatic from './emailStatic.gif';
 import resume from './resume.gif';
-import resumeStatic from './resumeStatic.gif';
 import phone from './phone.gif';
-import phoneStatic from './phoneStatic.gif';
+import instagram from './instagram.gif';
 
 class Fastbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      fixed: false
-    }
-    this.handleScroll = this.handleScroll.bind(this);
-  }
+
+		constructor(props) {
+	    super(props);
+			this.state = {
+				past_first: false
+			}
+			this.handleScroll = this.handleScroll.bind(this);
+	  }
 
   componentDidMount() {
     const options = {
       duration: 800,
       origin: "bottom",
-      distance: "50px",
-      mobile: false
+      distance: "0px",
+      mobile: false,
     }
-
     sr().reveal(this.refs.fastbarReveal, options)
     this.height = this.refs.fastbarReveal.getBoundingClientRect().top + (window.pageYOffset || document.documentElement.scrollTop);
 
@@ -46,47 +40,54 @@ class Fastbar extends Component {
 
   handleScroll(e) {
     let scrollTop = document.documentElement.scrollTop;
-    if (scrollTop < this.height && this.state.fixed !== 0) {
-      this.setState({ ...this.state, fixed: false });
+    if (scrollTop < this.height && this.state.past_first) {
+      this.setState({ ...this.state, past_first: false });
     }
-    else if (scrollTop >= this.height && this.state.fixed !== 1) {
-      this.setState({ ...this.state, fixed: true });
+    else if (scrollTop >= this.height && !this.state.past_first) {
+      this.setState({ ...this.state, past_first: true });
     }
   }
 
   render() {
-    const { fixed } = this.state;
     return (
-      <div ref="fastbarReveal">
-        <Container className={fixed ? "fastbar fixed" : "fastbar"}>
-          <div className="fastbar-background"/>
-          {
-            map(links, ({ action, animatedImage, staticImage, method, target }, name) => (
-              <Item fixed={fixed} key={name}>
-                <form method={method} action={ action } target={target} className="hvr-shadow hvr-grow">
-                  <Button fixed={fixed} type="submit">
-                    <LazyLoad><Image className="animated-image" height="50px" src={animatedImage}/></LazyLoad>
-                    <Image className="static-image" height="50px" src={staticImage}/>
-                    <span>{ name }</span>
-                  </Button>
-                </form>
-              </Item>)
-            )
-          }
-        </Container>
-        <div className="fastbar-mobile">
-          {
-            map(links, ({ action, method, target }, name) => (
-              <form key={name} method={method} action={ action } target={target} className="hvr-shadow hvr-grow">
-                <Button fixed={fixed} type="submit">
-                  <span>{ name }</span>
-                </Button>
-                <div style={{ margin: "2px 0 4px 0", alignSelf: 'stretch', width: "1px", backgroundColor: "black"}}/>
-              </form>
-            ))
-          }
-        </div>
-      </div>
+			<FadeIn>
+				<QuickNav className={this.state.past_first ? "" : "hidden"}>
+				{
+					map(links, ({ action, animatedImage, method, target }, name) => (
+						<a target="_blank" href={action} className="hvr-grow"><img className="animated-image" height="30px" width="30px" src={animatedImage}/></a>
+					))
+				}
+				</QuickNav>
+	      <div ref="fastbarReveal" style={{ width: "50vw" }}>
+	        <Container className="fastbar">
+	          <div className="fastbar-background"/>
+	          {
+	            map(links, ({ action, animatedImage, method, target }, name) => (
+	              <Item style={{ width: "100%", "margin-left": "0", "margin-right": "0" }} key={name}>
+	                <form style={{ width: "100%" }} method={method} action={ action } target={target} className="hvr-grow">
+	                  <Button type="submit">
+	                    <Image className="animated-image" height="50px" width="50px" src={animatedImage}/>
+	                    <div>{ name }</div>
+	                  </Button>
+	                </form>
+	              </Item>)
+	            )
+	          }
+	        </Container>
+	        <div className="fastbar-mobile">
+	          {
+	            map(links, ({ action, method, target }, name) => (
+	              <form key={name} method={method} action={ action } target={target} className="hvr-grow">
+	                <Button type="submit">
+	                  <span>{ name }</span>
+	                </Button>
+	                <div style={{ margin: "2px 0 4px 0", alignSelf: 'stretch', width: "1px", backgroundColor: "black"}}/>
+	              </form>
+	            ))
+	          }
+	        </div>
+	      </div>
+			</FadeIn>
     )
   }
 }
@@ -137,6 +138,10 @@ const Item = styled.span`
 `;
 
 const Container = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+
   & * {
     transition: 0.5s ease;
   }
@@ -146,25 +151,9 @@ const Button = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  & .animated-image {
-    display: none;
-  }
-  & .static-image {
-    display: block;
-  }
-
+	justify-content: space-around;
   &:focus {
     outline: none;
-  }
-
-  &:hover {
-    & .animated-image {
-      display: block;
-    }
-    & .static-image {
-      display: none;
-    }
   }
 `;
 
@@ -177,29 +166,73 @@ const links = {
   GitHub: {
     action: "https://www.github.com/ZhengRaymond",
     animatedImage: github,
-    staticImage: githubStatic,
+    // staticImage: githubStatic,
     target: "_blank"
   },
   LinkedIn: {
     action: "https://www.linkedin.com/in/ZhengRaymond/",
     animatedImage: linkedin,
-    staticImage: linkedinStatic,
+    // staticImage: linkedinStatic,
     target: "_blank"
   },
   Resume: {
     action: "https://github.com/ZhengRaymond/resume/raw/master/Raymond%20Zheng's%20Resume.pdf",
     method: "get",
     animatedImage: resume,
-    staticImage: resumeStatic
+    // staticImage: resumeStatic
   },
   Email: {
-    action: "mailto:zhengraymond@outlook.com",
+    action: "mailto:raymond.zheng.8@gmail.com",
     animatedImage: email,
-    staticImage: emailStatic
+    // staticImage: emailStatic
   },
-  Phone: {
-    action: "tel:+5105841528",
-    animatedImage: phone,
-    staticImage: phoneStatic
-  }
+  Instagram: {
+    action: "https://www.instagram.com/codetojoy/",
+    animatedImage: instagram,
+    // staticImage: instagramStatic
+  },
+  // Phone: {
+  //   action: "tel:+5105841528",
+  //   animatedImage: phone,
+  //   staticImage: phoneStatic
+  // }
 }
+
+const fadein = keyframes`
+ 0% {
+	 opacity: 0;
+ }
+ 80% {
+	 opacity: 0;
+ }
+ 100% {
+	 opacity: 1;
+ }
+`
+
+const FadeIn = styled.div`
+ 	animation: ${fadein} 3s ease-in;
+
+	/* This is for QuickNav: */
+	.hidden {
+		opacity: 0;
+		transform: translateX(100px);
+		transition: 0.5s ease;
+	}
+`;
+
+const QuickNav = styled.div`
+	display: flex;
+	flex-direction: column;
+
+	a {
+		margin: 0px 0;
+	}
+
+	position: fixed;
+	top: 5px;
+	right: 5px;
+	transition: 0.5s ease;
+	cursor: pointer;
+	z-index: 1;
+`;

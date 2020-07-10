@@ -8,7 +8,8 @@ const Page = styled.div`
   @media (max-width: 700px) {
     margin: 10vh 5vw;
   }
-  max-width: ${ props => props.max || "1200px" };
+  /* max-width: ${ props => props.max || "1200px" }; */
+	width: 80vw;
   height: ${ props => props.unlimited ? "auto" : "100vh" };
   background-color: ${ props => props.backgroundColor || "white"};
 `;

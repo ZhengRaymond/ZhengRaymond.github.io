@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Greeting, Fastbar, ScrollDownArrow, Page, Work, IncompleteWork, Projects, Contact, Appointer } from './components';
+import { Link, animateScroll as scroll, Element } from "react-scroll";
+import { Greeting, Fastbar, ScrollDownArrow, Page, Work, IncompleteWork, Projects, Projects2, Appointer, Sidebar, Gallery } from './components';
 import { zipWith } from 'lodash';
-import { incompleteWork as incompleteWorkData, work as workData, projects } from './data.json';
-import EtsyIcon from './assets/Etsy.jpeg';
-import GenesysIcon from './assets/Genesys.png';
-import HomerIcon from './assets/Homer.png';
-import AppdirectIcon from './assets/Appdirect.svg';
+import { work as data_work, project as data_project } from './data.json';
+import { origami as data_origami } from './data_origami.json';
 import styled, { keyframes } from 'styled-components';
-
-const incompleteWork = zipWith(incompleteWorkData, [ EtsyIcon, HomerIcon ], (item, value) => ({ ...item, icon: value }));
-const work = zipWith(workData, [ AppdirectIcon, GenesysIcon ], (item, value) => ({ ...item, icon: value }));
 
 window.onbeforeunload = function(){ window.scrollTo(0,0); }
 
@@ -29,26 +24,29 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Appointer/>
-        <WhiteFade style={{ display: this.state.fadeInitial }}/>
-        <Page top={true}>
-          <div style={{ height: "20vh" }}/>
-          <Greeting text="Raymond Zheng"/>
-          <div style={{ height: "5vh", width: "10px" }}/>
-          <Fastbar/>
-          <ScrollDownArrow/>
-        </Page>
-        <Page max="1100px" unlimited={true}>
-          <Greeting text="Work"/>
-          <IncompleteWork work={incompleteWork}/>
-          <Work work={work}/>
-        </Page>
-        <Page unlimited={true} backgroundColor="white">
-          <Projects projects={projects} />
-        </Page>
-        <Page>
-          <Contact/>
-        </Page>
+        <WhiteFade style={{ display: this.state.fadeInitial, position: "absolute", left: "110px" }}/>
+				<Sidebar/>
+				<div>
+	        <Page href="#Home" top={true}>
+	          <div style={{ height: "20vh" }}/>
+	          <Greeting text="raymond_zheng"/>
+	          <div style={{ height: "5vh", width: "10px" }}/>
+	          <Fastbar/>
+	        </Page>
+	        <Element name="s_work"><Page unlimited={true} backgroundColor="white">
+	          <Projects2 name="Work" projects={data_work}/>
+	        </Page></Element>
+					<div style={{height:"20vh"}}/>
+					<Element name="s_project"><Page unlimited={true} backgroundColor="white">
+	          <Projects name="Projects" projects={data_project} />
+	        </Page></Element>
+					<div style={{height:"20vh"}}/>
+					<Element name="s_origami"><Page unlimited={true} backgroundColor="white">
+	          <Gallery name="Origami" data={data_origami} />
+	        </Page></Element>
+					<div style={{height:"20vh"}}/>
+					<div style={{height:"20vh"}}/>
+				</div>
       </div>
     );
   }

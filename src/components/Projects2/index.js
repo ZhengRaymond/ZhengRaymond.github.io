@@ -33,9 +33,10 @@ class Projects extends Component {
         {
           map(this.props.projects, (project, index) => (
             <a key={project.title} href={project.link} target="_blank" style={{ textDecorationColor: colors[index % 5] }}>
-              <Tile className="project-tile-reveal" key={project.title}>
-                <div><div>{ project.title }</div></div>
+              <Tile className="project-tile-reveal">
+                <div><div><img width="130px" height="130px" src={project.img} style={{ "z-index": "-1"}}/></div></div>
                 <div>
+									<div style={{ "font-weight": "normal", "font-size": "1.4em"}}>{ project.title }</div>
                   {
                     map(project.details, (detail, index) => (
                       <div style={{ margin: "10px 0", overflow: "hidden"}} key={"detail"+index}>{ detail }</div>
@@ -91,7 +92,7 @@ const Tile = styled.div`
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.96);
     font-size: 40px;
   }
 
@@ -100,7 +101,7 @@ const Tile = styled.div`
       & div {
         transform: scale(0.8);
       }
-      opacity: 0;
+      opacity: 0.2;
     }
 
     &::before, &::after {

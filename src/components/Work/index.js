@@ -3,89 +3,40 @@ import styled from 'styled-components';
 import { map } from 'lodash';
 import Reveal from '../ScrollReveal';
 
-class Work extends Component {
-  render() {
-    return (
-      <Container>
-        {
-          map(this.props.work, ({ title, details, completed, link, icon }, index) => (
-            index % 2 === 0 ? (
-              <Panel key={title}>
-                <Title>
-                  <Link href={link} target="_blank">{title}</Link>
-                </Title>
-                <Icon options={{ viewFactor: 0.2, origin: "left", distance: "100px" }}>
-                  <Link href={link} target="_blank">
-                    <img alt={link} src={icon}/>
-                  </Link>
-                </Icon>
-                <Text options={{ origin: "right", distance: "100px" }} interval={100} reveal="work-detail-reveal" >
-                  { map(details, (detail, index) => (<Detail className="work-detail-reveal" key={"workDetail"+index}>{ detail }</Detail>)) }
-                </Text>
-              </Panel>
-            ):(
-              <Panel key={title}>
-                <Title>
-                  <Link href={link} target="_blank">{title}</Link>
-                </Title>
-                <Text options={{ origin: "left", distance: "100px" }} style={{ textAlign: "right" }} interval={100} reveal="work-detail-reveal">
-                  { map(details, (detail, index) => (<Detail className="work-detail-reveal" key={"workDetail"+index}>{ detail }</Detail>)) }
-                </Text>
-                <Icon options={{ viewFactor: 0.2, origin: "right", distance: "100px" }}>
-                  <Link href={link} target="_blank">
-                    <img alt={link} src={icon}/>
-                  </Link>
-                </Icon>
-              </Panel>
-            )
-          ))
-        }
-      </Container>
-    );
-  }
-}
-
 const mobileWidth = 500;
 const tabletWidth = 900;
 
-const Container = styled.div`
+const Grid = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-items: center;
   align-items: center;
-
-  @media(max-width: ${tabletWidth}px) {
-    & div:nth-child(1) div img {
-      left: -20vw;
-      top: 0;
-    }
-    & div:nth-child(2) div img {
-      left: 30vw;
-      top: -60vh;
-    }
-  }
+	width: 70%;
+	padding: 50px;
 `;
 
 const Panel = styled.div`
   width: 100%;
-  margin-bottom: 100px;
-  display: grid;
-  grid-template-rows: auto 1fr 1fr;
-  grid-template-columns: auto auto auto;
-  justify-items: center;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
+  margin-bottom: 30px;
+  display: flex;
 `;
 
 const Title = styled(Reveal)`
-  grid-column: span 3;
-  padding: 5px;
-  font-size: 3em;
-  font-weight: lighter;
-  @media (max-width: ${mobileWidth}px) {
-    margin: 0;
-  }
+	a {
+	  font-size: 2em;
+		color: black;
+		line-height: 0.7;
+		display: inline-block;
+		margin-bottom: 10px;
+		text-decoration: none;
+		border-bottom: 1px solid currentColor;
+	  font-weight: lighter;
+		text-shadow:
+    2px 2px white,
+    2px -2px white,
+    -2px 2px white,
+    -2px -2px white;
+	}
 `;
 
 const Icon = styled(Reveal)`
@@ -127,36 +78,30 @@ const Icon = styled(Reveal)`
   }
 `;
 
-const Text = styled(Reveal)`
-  grid-column: span 2;
-  grid-row: span 2;
-  align-self: stretch;
-  text-shadow: 0 0 4px white;
+const Date = styled(Reveal)`
+  font-weight: lighter
+`;
 
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(auto-fill, 1fr);
-  @media (max-width: ${tabletWidth}px) {
-    grid-column: span 3;
-    grid-row: span 3;
+class Work extends Component {
+  render() {
+    return (
+      <Grid>
+        {map(
+					this.props.data_work,
+					({ title, link, date, img }, index) => (
+						<Panel>
+							<img width="50" height="50" src={require(`../../assets/${img}`)}/>
+							<div style={{display: "flex", "flex-direction": "column", padding: "0 15px", "justify-content": "space-evenly"}}>
+								<Title><a href={link}>{title}</a></Title>
+								<Date>{date}</Date>
+							</div>
+						</Panel>
+          )
+      	)}
+      </Grid>
+    );
   }
-`;
+}
 
-const Link = styled.a`
-  text-decoration: none;
-  color: black;
-  transition: 0.5s ease;
-
-  &:hover {
-    transform: scale(1.05);
-    transition: 0.5s ease;
-  }
-`;
-
-const Detail = styled.div`
-  margin: 10px;
-  font-weight: lighter;
-  font-size: 18px;
-`;
 
 export default Work;

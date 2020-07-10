@@ -1,0 +1,11 @@
+{
+	"origami":[
+		{
+			"title":"Robinhood",
+			"link":"https://robinhood.com",
+			"type": "work",
+			"details":["Risk and Fraud Engineer", "Feb 2020 to Current"],
+			"img":"Robinhood.png"
+	 	}
+	]
+}

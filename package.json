@@ -5,18 +5,20 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "hover.css": "^2.2.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "material-ui": "^0.20.0",
     "moment": "^2.20.1",
     "react": "^16.2.0",
     "react-big-calendar": "^0.17.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.12.0",
     "react-form": "^2.16.1",
     "react-icons": "^2.2.7",
     "react-lazyload": "^2.3.0",
-    "react-parallax": "^1.6.0",
+    "react-parallax": "^3.0.0",
+    "react-photo-gallery": "^8.0.0",
     "react-reveal": "^0.7.3",
-    "react-scripts": "^3.3.1",
+    "react-scripts": "^3.3.0",
+    "react-scroll": "^1.7.16",
     "scrollreveal": "^4.0.0-beta.23",
     "styled-components": "^2.4.0"
   },
@@ -29,7 +31,7 @@
     "deploy": "npm run build&&gh-pages -d build"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0"
+    "gh-pages": "^2.1.1"
   },
   "browserslist": {
     "production": [
