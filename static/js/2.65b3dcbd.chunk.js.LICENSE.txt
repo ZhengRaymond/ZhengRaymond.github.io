@@ -16,10 +16,6 @@ object-assign
 */
 
 /*!
- * Programatically add the following
- */
-
-/*!
  * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
  *
  * Copyright (c) 2014-2017, Jon Schlinkert.
@@ -161,7 +157,7 @@ object-assign
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  */
 
-/** @license React v0.18.0
+/** @license React v0.19.1
  * scheduler.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -170,7 +166,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v16.12.0
+/** @license React v16.13.1
  * react-dom.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -179,7 +175,7 @@ object-assign
  * LICENSE file in the root directory of this source tree.
  */
 
-/** @license React v16.12.0
+/** @license React v16.13.1
  * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
